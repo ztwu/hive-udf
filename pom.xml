@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.iflytek.edmp</groupId>
+    <artifactId>hive.udf</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+    <name>hive.udf</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <encoding>UTF-8</encoding>
+        <junit.version>4.12</junit.version>
+        <fastjson.version>1.2.31</fastjson.version>
+        <log4j.version>1.2.17</log4j.version>
+        <hive.version>2.0.1</hive.version>
+        <!--本地运行-->
+        <!--<scope.flag>compile</scope.flag>-->
+        <!--打包时不需要讲依赖包打包进去-->
+        <scope.flag>provided</scope.flag>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>com</id>
+            <name>iflytek</name>
+            <url>http://maven.iflytek.com:8081/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>repo-iflytek</id>
+            <name>repo-iflytek</name>
+            <url>http://192.168.58.38:8081/nexus/content/groups/public/</url>
+        </repository>
+        <repository>
+            <id>cloudera</id>
+            <url>https://repository.cloudera.com/artifactory/cloudera-repos/</url>
+        </repository>
+        <repository>
+            <id>spring-release</id>
+            <name>Spring Release Repository</name>
+            <url>http://repo.spring.io/libs-release</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>central-repos</id>
+            <name>Central Repository</name>
+            <url>http://repo.maven.apache.org/maven2</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>nexus-aliyun</id>
+            <name>Nexus aliyun</name>
+            <layout>default</layout>
+            <url>http://maven.aliyun.com/nexus/content/groups/public</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+
+    </repositories>
+
+    <dependencies>
+        <!--单元测试jar-->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--json解析包-->
+        <dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>${fastjson.version}</version>
+		</dependency>
+        <!--log4j日志包-->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+            <scope>${scope.flag}</scope>
+        </dependency>
+        <!--hive依赖包-->
+        <dependency>
+            <groupId>org.apache.hive</groupId>
+            <artifactId>hive-exec</artifactId>
+            <version>${hive.version}</version>
+            <scope>${scope.flag}</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <finalName>hive-udf-test</finalName>
+
+        <plugins>
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>assembly</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+
+    </build>
+
+</project>

@@ -1,0 +1,46 @@
+<assembly>
+    <id>package</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <fileSets>
+        <fileSet>
+            <directory>src/main/bin</directory>
+            <outputDirectory>/bin</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <filtered>true</filtered>
+            <directory>src/main/resources</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>**/*.properties</include>
+            </includes>
+        </fileSet>
+        <fileSet>
+            <directory>src/main/resources</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>**</include>
+            </includes>
+            <excludes>
+                <exclude>**/*.properties</exclude>
+            </excludes>
+        </fileSet>
+        <fileSet>
+            <filtered>true</filtered>
+            <directory>src/main</directory>
+            <outputDirectory>/</outputDirectory>
+            <includes>
+                <include>readme.txt</include>
+            </includes>
+        </fileSet>
+    </fileSets>
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <scope>runtime</scope>
+        </dependencySet>
+    </dependencySets>
+</assembly>
